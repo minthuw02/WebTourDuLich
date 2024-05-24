@@ -1,0 +1,175 @@
+﻿@model List<TourDuLich.Models.TourDuLich>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/layout.cshtml";
+}
+<!---------- Slide ---------->
+<div class="col-12">
+    <div class="banner">
+        <img alt="banner" src="~/Content/images/banner.png" />
+    </div>
+</div>
+<!---------- End Slide ---------->
+<!---------- Search ---------->
+<div class="col-12" style="padding: 10px 15px;">
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="Loại tour">
+        <input type="text" class="search-input" placeholder="Nơi đến">
+        <input type="date" class="search-input" placeholder="Ngày khởi hành">
+        <input type="text" class="search-input" placeholder="Giảm giá">
+        <input type="text" class="search-input" placeholder="Giá">
+        <button type="submit" class="search-button">
+            <img src="~/Content/images/search-icon.png" alt="Search">
+        </button>
+    </div>
+</div>
+
+<!---------- End Search ---------->
+<!---------- Content ---------->
+<!---------- TOUR NỔI BẬT ---------->
+<div class="col-12" style="display: flex; flex-wrap: wrap;">
+    <div class="col-12">
+        <h1 class="section-title">TOUR NỔI BẬT</h1>
+    </div>
+    <div class="col-12">
+        @foreach (var item in Model)
+        {
+            <div class="col-4" style="padding: 20px;">
+                <div class="content-box">
+                    <img src="@item.Images" alt="Image" class="content-image">
+                    <h2>@item.Title</h2>
+                    <p>Lịch khởi hành: @item.LichDinhLy</p>
+                    <p>Thời gian: @item.NumOfDay</p>
+                    <p class="price">@item.Price VND</p>
+                    <p>Số chỗ: @item.AmountOfPepople</p>
+                    <a href="#" class="read-more">Read more</a>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+<!---------- END TOUR NỔI BẬT ---------->
+<!---------- TOUR TRONG NƯỚC ---------->
+<div class="col-12" style="display: flex; flex-wrap: wrap;">
+    <div class="col-12">
+        <h1 class="section-title">TOUR TRONG NƯỚC</h1>
+    </div>
+    <div class="col-4" style="padding: 20px;">
+        <div class="content-box">
+            <img src="~/Content/images/2TTravel.png" alt="Image" class="content-image">
+            <h2>Title</h2>
+            <p>Description</p>
+            <p class="price">Price: $100</p>
+            <a href="#" class="read-more">Read more</a>
+        </div>
+    </div>
+    <div class="col-4" style="padding: 20px;">
+        <div class="content-box">
+            <img src="~/Content/images/2TTravel.png" alt="Image" class="content-image">
+            <h2>Title</h2>
+            <p>Description</p>
+            <p class="price">Price: $100</p>
+            <a href="#" class="read-more">Read more</a>
+        </div>
+    </div>
+    <div class="col-4" style="padding: 20px;">
+        <div class="content-box">
+            <img src="~/Content/images/2TTravel.png" alt="Image" class="content-image">
+            <h2>Title</h2>
+            <p>Description</p>
+            <p class="price">Price: $100</p>
+            <a href="#" class="read-more">Read more</a>
+        </div>
+    </div>
+    <div class="col-4" style="padding: 20px;">
+        <div class="content-box">
+            <img src="~/Content/images/2TTravel.png" alt="Image" class="content-image">
+            <h2>Title</h2>
+            <p>Description</p>
+            <p class="price">Price: $100</p>
+            <a href="#" class="read-more">Read more</a>
+        </div>
+    </div>
+    <div class="col-4" style="padding: 20px;">
+        <div class="content-box">
+            <img src="~/Content/images/2TTravel.png" alt="Image" class="content-image">
+            <h2>Title</h2>
+            <p>Description</p>
+            <p class="price">Price: $100</p>
+            <a href="#" class="read-more">Read more</a>
+        </div>
+    </div>
+    <div class="col-4" style="padding: 20px;">
+        <div class="content-box">
+            <img src="~/Content/images/2TTravel.png" alt="Image" class="content-image">
+            <h2>Title</h2>
+            <p>Description</p>
+            <p class="price">Price: $100</p>
+            <a href="#" class="read-more">Read more</a>
+        </div>
+    </div>
+</div>
+<!---------- END TOUR TRONG NƯỚC ---------->
+<!---------- TOUR NƯỚC NGOÀI ---------->
+<div class="col-12" style="display: flex; flex-wrap: wrap;">
+    <div class="col-12">
+        <h1 class="section-title">TOUR NƯỚC NGOÀI</h1>
+    </div>
+    <div class="col-4" style="padding: 20px;">
+        <div class="content-box">
+            <img src="~/Content/images/2TTravel.png" alt="Image" class="content-image">
+            <h2>Title</h2>
+            <p>Description</p>
+            <p class="price">Price: $100</p>
+            <a href="#" class="read-more">Read more</a>
+        </div>
+    </div>
+    <div class="col-4" style="padding: 20px;">
+        <div class="content-box">
+            <img src="~/Content/images/2TTravel.png" alt="Image" class="content-image">
+            <h2>Title</h2>
+            <p>Description</p>
+            <p class="price">Price: $100</p>
+            <a href="#" class="read-more">Read more</a>
+        </div>
+    </div>
+    <div class="col-4" style="padding: 20px;">
+        <div class="content-box">
+            <img src="~/Content/images/2TTravel.png" alt="Image" class="content-image">
+            <h2>Title</h2>
+            <p>Description</p>
+            <p class="price">Price: $100</p>
+            <a href="#" class="read-more">Read more</a>
+        </div>
+    </div>
+    <div class="col-4" style="padding: 20px;">
+        <div class="content-box">
+            <img src="~/Content/images/2TTravel.png" alt="Image" class="content-image">
+            <h2>Title</h2>
+            <p>Description</p>
+            <p class="price">Price: $100</p>
+            <a href="#" class="read-more">Read more</a>
+        </div>
+    </div>
+    <div class="col-4" style="padding: 20px;">
+        <div class="content-box">
+            <img src="~/Content/images/2TTravel.png" alt="Image" class="content-image">
+            <h2>Title</h2>
+            <p>Description</p>
+            <p class="price">Price: $100</p>
+            <a href="#" class="read-more">Read more</a>
+        </div>
+    </div>
+    <div class="col-4" style="padding: 20px;">
+        <div class="content-box">
+            <img src="~/Content/images/2TTravel.png" alt="Image" class="content-image">
+            <h2>Title</h2>
+            <p>Description</p>
+            <p class="price">Price: $100</p>
+            <a href="#" class="read-more">Read more</a>
+        </div>
+    </div>
+</div>
+<!---------- END TOUR NƯỚC NGOÀI ---------->
+<!---------- End Content ---------->
