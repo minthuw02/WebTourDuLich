@@ -23,5 +23,12 @@ namespace TourDuLich.Models
         public Nullable<int> AmountOfPepople { get; set; }
         public Nullable<double> Price { get; set; }
         public string Description { get; set; }
+        public int? idTinh { get; set; }
+        public int? idLoaiTour { get; set; }
+        public int? idMucGia { get; set; }
+
+        public virtual LoaiTour LoaiTour { get; set; }
+        public virtual MucGia MucGia { get; set; }
+        public virtual TinhThanh TinhThanh { get; set; }
     }
 }

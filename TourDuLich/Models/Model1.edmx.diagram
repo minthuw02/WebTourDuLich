@@ -5,7 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="26fceca277d14dda87a97357d3b18104" Name="Diagram1">
-        <EntityTypeShape EntityType="DuLichDBModel.TourDuLich" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLichDBModel.TourDuLich" Width="1.5" PointX="3.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DuLichDBModel.LoaiTour" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="DuLichDBModel.MucGia" Width="1.5" PointX="6.125" PointY="3.5" />
+        <EntityTypeShape EntityType="DuLichDBModel.sysdiagram" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="DuLichDBModel.TinhThanh" Width="1.5" PointX="6.375" PointY="0.875" />
+        <AssociationConnector Association="DuLichDBModel.FK_LoaiTour_TourDuLich" />
+        <AssociationConnector Association="DuLichDBModel.FK_MucGia_TourDuLich" />
+        <AssociationConnector Association="DuLichDBModel.FK_TinhThanh_TourDuLich" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

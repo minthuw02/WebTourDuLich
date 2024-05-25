@@ -13,10 +13,14 @@ namespace TourDuLich.Controllers
         // GET: Home
         public ActionResult Index()
         {
-        DuLichDBEntities db = new DuLichDBEntities();
+        DuLichDBEntities1 db = new DuLichDBEntities1();
         //Lấy danh sách tour
         var listTour = db.TourDuLiches.ToList();
             return View(listTour);
+        }
+        public ActionResult Search() {
+
+            return View();
         }
     }
 }

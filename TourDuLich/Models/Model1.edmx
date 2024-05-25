@@ -4,7 +4,38 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DuLichDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DuLichDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="LoaiTour">
+          <Key>
+            <PropertyRef Name="ID_Loai" />
+          </Key>
+          <Property Name="ID_Loai" Type="int" Nullable="false" />
+          <Property Name="LoaiTour" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="MucGia">
+          <Key>
+            <PropertyRef Name="ID_MucGia" />
+          </Key>
+          <Property Name="ID_MucGia" Type="int" Nullable="false" />
+          <Property Name="Gia" Type="float" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TinhThanh">
+          <Key>
+            <PropertyRef Name="ID_Tinh" />
+          </Key>
+          <Property Name="ID_Tinh" Type="int" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="TourDuLich">
           <Key>
             <PropertyRef Name="ID" />
@@ -19,11 +50,62 @@
           <Property Name="Price" Type="float" />
           <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
+        <Association Name="FK_LoaiTour_TourDuLich">
+          <End Role="TourDuLich" Type="Self.TourDuLich" Multiplicity="1" />
+          <End Role="LoaiTour" Type="Self.LoaiTour" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TourDuLich">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LoaiTour">
+              <PropertyRef Name="ID_Loai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MucGia_TourDuLich">
+          <End Role="TourDuLich" Type="Self.TourDuLich" Multiplicity="1" />
+          <End Role="MucGia" Type="Self.MucGia" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TourDuLich">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MucGia">
+              <PropertyRef Name="ID_MucGia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TinhThanh_TourDuLich">
+          <End Role="TourDuLich" Type="Self.TourDuLich" Multiplicity="1" />
+          <End Role="TinhThanh" Type="Self.TinhThanh" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TourDuLich">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TinhThanh">
+              <PropertyRef Name="ID_Tinh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DuLichDBModelStoreContainer">
+          <EntitySet Name="LoaiTour" EntityType="Self.LoaiTour" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MucGia" EntityType="Self.MucGia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TinhThanh" EntityType="Self.TinhThanh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TourDuLich" EntityType="Self.TourDuLich" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_LoaiTour_TourDuLich" Association="Self.FK_LoaiTour_TourDuLich">
+            <End Role="TourDuLich" EntitySet="TourDuLich" />
+            <End Role="LoaiTour" EntitySet="LoaiTour" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MucGia_TourDuLich" Association="Self.FK_MucGia_TourDuLich">
+            <End Role="TourDuLich" EntitySet="TourDuLich" />
+            <End Role="MucGia" EntitySet="MucGia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TinhThanh_TourDuLich" Association="Self.FK_TinhThanh_TourDuLich">
+            <End Role="TourDuLich" EntitySet="TourDuLich" />
+            <End Role="TinhThanh" EntitySet="TinhThanh" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DuLichDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -40,10 +122,99 @@
           <Property Name="AmountOfPepople" Type="Int32" />
           <Property Name="Price" Type="Double" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LoaiTour" Relationship="DuLichDBModel.FK_LoaiTour_TourDuLich" FromRole="TourDuLich" ToRole="LoaiTour" />
+          <NavigationProperty Name="MucGia" Relationship="DuLichDBModel.FK_MucGia_TourDuLich" FromRole="TourDuLich" ToRole="MucGia" />
+          <NavigationProperty Name="TinhThanh" Relationship="DuLichDBModel.FK_TinhThanh_TourDuLich" FromRole="TourDuLich" ToRole="TinhThanh" />
         </EntityType>
         <EntityContainer Name="DuLichDBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TourDuLiches" EntityType="Self.TourDuLich" />
+          <EntitySet Name="LoaiTours" EntityType="DuLichDBModel.LoaiTour" />
+          <EntitySet Name="MucGias" EntityType="DuLichDBModel.MucGia" />
+          <EntitySet Name="sysdiagrams" EntityType="DuLichDBModel.sysdiagram" />
+          <EntitySet Name="TinhThanhs" EntityType="DuLichDBModel.TinhThanh" />
+          <AssociationSet Name="FK_LoaiTour_TourDuLich" Association="DuLichDBModel.FK_LoaiTour_TourDuLich">
+            <End Role="TourDuLich" EntitySet="TourDuLiches" />
+            <End Role="LoaiTour" EntitySet="LoaiTours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MucGia_TourDuLich" Association="DuLichDBModel.FK_MucGia_TourDuLich">
+            <End Role="TourDuLich" EntitySet="TourDuLiches" />
+            <End Role="MucGia" EntitySet="MucGias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TinhThanh_TourDuLich" Association="DuLichDBModel.FK_TinhThanh_TourDuLich">
+            <End Role="TourDuLich" EntitySet="TourDuLiches" />
+            <End Role="TinhThanh" EntitySet="TinhThanhs" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="LoaiTour">
+          <Key>
+            <PropertyRef Name="ID_Loai" />
+          </Key>
+          <Property Name="ID_Loai" Type="Int32" Nullable="false" />
+          <Property Name="LoaiTour1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TourDuLich" Relationship="DuLichDBModel.FK_LoaiTour_TourDuLich" FromRole="LoaiTour" ToRole="TourDuLich" />
+        </EntityType>
+        <EntityType Name="MucGia">
+          <Key>
+            <PropertyRef Name="ID_MucGia" />
+          </Key>
+          <Property Name="ID_MucGia" Type="Int32" Nullable="false" />
+          <Property Name="Gia" Type="Double" />
+          <NavigationProperty Name="TourDuLich" Relationship="DuLichDBModel.FK_MucGia_TourDuLich" FromRole="MucGia" ToRole="TourDuLich" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TinhThanh">
+          <Key>
+            <PropertyRef Name="ID_Tinh" />
+          </Key>
+          <Property Name="ID_Tinh" Type="Int32" Nullable="false" />
+          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TourDuLich" Relationship="DuLichDBModel.FK_TinhThanh_TourDuLich" FromRole="TinhThanh" ToRole="TourDuLich" />
+        </EntityType>
+        <Association Name="FK_LoaiTour_TourDuLich">
+          <End Type="DuLichDBModel.TourDuLich" Role="TourDuLich" Multiplicity="1" />
+          <End Type="DuLichDBModel.LoaiTour" Role="LoaiTour" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TourDuLich">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LoaiTour">
+              <PropertyRef Name="ID_Loai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MucGia_TourDuLich">
+          <End Type="DuLichDBModel.TourDuLich" Role="TourDuLich" Multiplicity="1" />
+          <End Type="DuLichDBModel.MucGia" Role="MucGia" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TourDuLich">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MucGia">
+              <PropertyRef Name="ID_MucGia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TinhThanh_TourDuLich">
+          <End Type="DuLichDBModel.TourDuLich" Role="TourDuLich" Multiplicity="1" />
+          <End Type="DuLichDBModel.TinhThanh" Role="TinhThanh" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TourDuLich">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TinhThanh">
+              <PropertyRef Name="ID_Tinh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -62,6 +233,41 @@
                 <ScalarProperty Name="AmountOfPepople" ColumnName="AmountOfPepople" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiTours">
+            <EntityTypeMapping TypeName="DuLichDBModel.LoaiTour">
+              <MappingFragment StoreEntitySet="LoaiTour">
+                <ScalarProperty Name="LoaiTour1" ColumnName="LoaiTour" />
+                <ScalarProperty Name="ID_Loai" ColumnName="ID_Loai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MucGias">
+            <EntityTypeMapping TypeName="DuLichDBModel.MucGia">
+              <MappingFragment StoreEntitySet="MucGia">
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="ID_MucGia" ColumnName="ID_MucGia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DuLichDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TinhThanhs">
+            <EntityTypeMapping TypeName="DuLichDBModel.TinhThanh">
+              <MappingFragment StoreEntitySet="TinhThanh">
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="ID_Tinh" ColumnName="ID_Tinh" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

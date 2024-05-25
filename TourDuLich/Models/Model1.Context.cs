@@ -13,10 +13,10 @@ namespace TourDuLich.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DuLichDBEntities : DbContext
+    public partial class DuLichDBEntities1 : DbContext
     {
-        public DuLichDBEntities()
-            : base("name=DuLichDBEntities")
+        public DuLichDBEntities1()
+            : base("name=DuLichDBEntities1")
         {
         }
     
@@ -26,5 +26,9 @@ namespace TourDuLich.Models
         }
     
         public virtual DbSet<TourDuLich> TourDuLiches { get; set; }
+        public virtual DbSet<LoaiTour> LoaiTours { get; set; }
+        public virtual DbSet<MucGia> MucGias { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<TinhThanh> TinhThanhs { get; set; }
     }
 }
